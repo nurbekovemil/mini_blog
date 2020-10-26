@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const config = require('config')
-const PORT = config.get('PORT') || 5000;
+const PORT = process.env.PORT || config.get('PORT')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()

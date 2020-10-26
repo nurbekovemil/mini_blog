@@ -1,7 +1,7 @@
 {
   "name": "react-app",
   "version": "1.0.0",
-  "description": "blog-mern",
+  "description": "react-app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
