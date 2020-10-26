@@ -14,7 +14,7 @@ export const updateUserPicture = (data) => {
 	return async (dispatch) => {
 		try {
 			const token = localStorage.getItem('token')
-			await axios.post('http://localhost:5000/api/user/update-profile', data, {
+			await axios.post('https://react-mini-blog.herokuapp.com/api/user/update-profile', data, {
 				headers: {Authorization: `Bearer ${token}`,'Content-Type':'multipart/form-data'}
 			})
 			.then(res => {
@@ -32,7 +32,7 @@ export const updateUserData = (data) => {
 	return async (dispatch) => {
 		try {
 			const token = localStorage.getItem('token')
-			await axios.post('http://localhost:5000/api/user/update', data, 
+			await axios.post('https://react-mini-blog.herokuapp.com/api/user/update', data, 
 			{
 				headers: {Authorization: `Bearer ${token}`}
 			})

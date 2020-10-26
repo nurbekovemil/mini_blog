@@ -6,7 +6,7 @@ import axios from 'axios'
 export const loginAction = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.post('http://localhost:5000/api/auth/login', data)
+			await axios.post('https://react-mini-blog.herokuapp.com/api/auth/login', data)
 				.then((res) => {
 					const data = res.data
 					localStorage.setItem('token', data.token)
@@ -25,7 +25,7 @@ export const loginAction = (data) => {
 export const registerAction = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.post('http://localhost:5000/api/auth/register', data)
+			await axios.post('https://react-mini-blog.herokuapp.com/api/auth/register', data)
 				.then(async(res) => {
 					const data = res.data
 					dispatch(messageAction(true, data.message))
@@ -41,7 +41,7 @@ export const authAction = () => {
 		try {
 			const token = localStorage.getItem('token') 
 			if(token){
-				await axios.get('http://localhost:5000/api/auth/auth', {headers: {Authorization: `Bearer ${token}`}})
+				await axios.get('https://react-mini-blog.herokuapp.com/api/auth/auth', {headers: {Authorization: `Bearer ${token}`}})
 				.then(async(res) => {
 					const data = await res.data
 					localStorage.setItem('token', data.token)

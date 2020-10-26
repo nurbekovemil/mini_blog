@@ -7,7 +7,7 @@ export const getPostList = () => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token')
-      await axios.get('http://localhost:5000/api/post/',{
+      await axios.get('https://react-mini-blog.herokuapp.com/api/post/',{
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(res => {
@@ -23,7 +23,7 @@ export const getPostList = () => {
 export const getPostById = (postId) => {
   return async (dispatch) => {
     try {
-      await axios.get(`http://localhost:5000/api/post/${postId}`)
+      await axios.get(`https://react-mini-blog.herokuapp.com/api/post/${postId}`)
       .then(res => {
         const resdata = res.data
         dispatch({type: DETAILPOST, payload: resdata})
@@ -38,7 +38,7 @@ export const createPost = (data) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token')
-      await axios.post('http://localhost:5000/api/post/create', data, {
+      await axios.post('https://react-mini-blog.herokuapp.com/api/post/create', data, {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(res => {
@@ -55,7 +55,7 @@ export const deletePost = (postId) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token')
-      await axios.delete(`http://localhost:5000/api/post/${postId}`, {
+      await axios.delete(`https://react-mini-blog.herokuapp.com/api/post/${postId}`, {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(res => {
