@@ -4,7 +4,7 @@
   "description": "blog-mern",
   "main": "app.js",
   "scripts": {
-    "start": "npm run start --prefix client",
+    "start": "node app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client"
   },
