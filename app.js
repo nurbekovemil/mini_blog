@@ -15,22 +15,22 @@ app.use('/api/auth', require('./routes/auth.route'))
 app.use('/api/user', require('./routes/user.route'))
 app.use('/api/post', require('./routes/post.route'))
 
-// app.use(express.static(__dirname, 'client'))
-// app.use(express.static(path.resolve(__dirname, 'client', 'build')))
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.resolve(__dirname,'client', 'build', 'index.html'))
-// })
-
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  
-}
-//build mode
+app.use(express.static(__dirname, 'client'))
+app.use(express.static(path.resolve(__dirname, 'client', 'build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+	res.sendFile(path.resolve(__dirname,'client', 'build', 'index.html'))
 })
+
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
+// // if(process.env.NODE_ENV === 'production') {
+// //   app.use(express.static(path.join(__dirname, 'client/build')));
+  
+// // }
+// //build mode
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/client/build/index.html'));
+// })
 
 const MongoDB = async () => {
 	try {
