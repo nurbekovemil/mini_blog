@@ -3,7 +3,7 @@ import { PencilSquare, Trash, Clipboard, HandThumbsUp} from 'react-bootstrap-ico
 import {Row, Col, ButtonGroup, Button} from 'react-bootstrap'
 
 
-export const Tools = ({dispatch, isEditPostModal, deletePost,likePost, toggleEditPostForm, post}) => {
+export const Tools = ({dispatch, isEditPostModal, deletePost, toggleEditPostForm, post}) => {
   
   const handlerRemovePost = () => {
     dispatch(deletePost(post._id))
@@ -12,14 +12,12 @@ export const Tools = ({dispatch, isEditPostModal, deletePost,likePost, toggleEdi
     dispatch(toggleEditPostForm(isEditPostModal, post))
     // console.log('open edot form ',post)
   }
-  const handleLikePost = () => {
-    
-  }
+
   const copyText = `${window.location.host}/post/${post._id}`
   return (
     <Row>
       <Col className="mr-auto">
-        <Button variant="light" size="sm" onClick={handleLikePost}><HandThumbsUp/></Button>    
+        <Button variant="light" size="sm"><HandThumbsUp/></Button>    
       </Col>
       <Col className="text-right">
         <ButtonGroup aria-label="Basic example">

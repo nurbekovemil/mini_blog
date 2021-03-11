@@ -1,7 +1,7 @@
 import React, {useEffect}from 'react'
 import {Card,Row, Col} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
-import {getPostList, deletePost, toggleEditPostForm, likePost } from '../../redux/actions/postAction'
+import {getPostList, deletePost, toggleEditPostForm } from '../../redux/actions/postAction'
 
 import {Link} from 'react-router-dom'
 import {Tools} from '../../components/post/Tools'
@@ -34,7 +34,6 @@ export const ListPost = () => {
                     isEditPostModal={isEditPostModal} 
                     toggleEditPostForm={toggleEditPostForm} 
                     post={post}
-                    likePost={likePost} 
                     />
                 </Card.Footer>
               </Card>
