@@ -19,17 +19,11 @@ export const UserPicture = ({user, isEditing}) => {
   }
   
   return (
-    <Row className="25">
-      <Col>
-        <Card border="white">
-        <Card.Body className="d-flex justify-content-center">
-          <Card.Img style={{width: 126+'px', height: 126+'px'}} src={user.profileImg}/>
-
-
-
-
-          
-        </Card.Body>
+    <>
+      <Card border="white">
+        <Card.Body >
+          <Card.Img className="rounded mx-auto d-block" style={{width: 200+'px', height: 124+'px', objectFit: 'contain'}} src={user.profileImg}/>
+      </Card.Body>
         {isEditing && <Form.File id="formcheck-api-regular">
         <Form>
           <Form.File 
@@ -49,8 +43,7 @@ export const UserPicture = ({user, isEditing}) => {
             </Button>
         </Form.File>}
       </Card>
-      </Col>
-    </Row>
+    </>
 
   )
 }

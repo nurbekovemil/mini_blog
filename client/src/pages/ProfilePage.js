@@ -16,7 +16,7 @@ export const ProfilePage = () => {
 
 	return (
 		<>
-			<Row className="h-75 mb-3">
+			<Row className="h-75 mb-3 ml-0 mx-auto">
 				<Col sm="12" md="4">
 					<UserPicture user={user} isEditing={isEditing}/>
 				</Col>
@@ -26,7 +26,7 @@ export const ProfilePage = () => {
 					<EditPost isEditPostModal={isEditPostModal}/>
 				</Col>
 			</Row>
-			<Row md={3}>
+			<Row xs={1} md={3}>
 				<ListPost/>
 			</Row>
 		</>
