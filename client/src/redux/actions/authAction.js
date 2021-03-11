@@ -1,4 +1,4 @@
-import { LOGIN, LOADING, LOGOUT, AUTH} from './types'
+import { LOGIN, LOADING, LOGOUT, AUTH, AUTHLOADING} from './types'
 
 import {messageAction} from './messageAction'
 import axios from 'axios'
@@ -6,18 +6,18 @@ import axios from 'axios'
 export const loginAction = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.post('https://react-mini-blog.herokuapp.com/api/auth/login', data)
+			dispatch({type: AUTHLOADING, payload: true})
+			await axios.post('/api/auth/login', data)
 				.then((res) => {
 					const data = res.data
 					localStorage.setItem('token', data.token)
-					dispatch({
-						type: LOGIN,
-						payload: data.user
-					})
+					dispatch({type: LOGIN,payload: data.user})
+					dispatch({type: AUTHLOADING,payload: false})
 				})
 		} catch (e) {
-			// dispatch(messageAction(true, e.response.data.message))
-
+			
+			dispatch(messageAction(e.response.data.message))
+			dispatch({type: AUTHLOADING,payload: false})
 		}
 	}
 }
@@ -25,13 +25,18 @@ export const loginAction = (data) => {
 export const registerAction = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.post('https://react-mini-blog.herokuapp.com/api/auth/register', data)
+			dispatch({type: AUTHLOADING,payload: true})
+			await axios.post('/api/auth/register', data)
 				.then(async(res) => {
 					const data = res.data
-					dispatch(messageAction(true, data.message))
+					localStorage.setItem('token', data.token)
+					dispatch({type: LOGIN,payload: data.user})
+					dispatch(messageAction(data.message))
+					dispatch({type: AUTHLOADING,payload: false})
 				})
 		} catch (e) {
-			dispatch(messageAction(true, e.response.data.message))
+			dispatch(messageAction(e.response.data.message))
+			dispatch({type: AUTHLOADING,payload: false})
 		}
 	}
 }
@@ -41,7 +46,7 @@ export const authAction = () => {
 		try {
 			const token = localStorage.getItem('token') 
 			if(token){
-				await axios.get('https://react-mini-blog.herokuapp.com/api/auth/auth', {headers: {Authorization: `Bearer ${token}`}})
+				await axios.get('/api/auth/auth', {headers: {Authorization: `Bearer ${token}`}})
 				.then(async(res) => {
 					const data = await res.data
 					localStorage.setItem('token', data.token)

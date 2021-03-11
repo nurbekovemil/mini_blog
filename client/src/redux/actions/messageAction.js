@@ -5,8 +5,8 @@ export const messageAction = (message) => {
 		dispatch({
 			type: MESSAGE,
 			payload: {
-				alert: true, 
 				message: message,
+				alert: true, 
 			}
 		})
 		setTimeout(() => {

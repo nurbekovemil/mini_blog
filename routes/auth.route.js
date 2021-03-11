@@ -26,13 +26,20 @@ router.post('/register', [
 			return res.status(400).json({message: 'Такой пользователь уже есть!'})
 		}
 		const hashPass = await bcrypt.hash(password, 12)
+		const defaultImg = req.protocol+'://'+req.get('host')+'/public/default/default_profile.jpg'
 		const user = new User({
 			username,
 			email,
-			password: hashPass
+			password: hashPass,
+			profileImg: defaultImg
 		})
 		await user.save()
-		res.status(201).json({message: 'Регистрация прошло успешно!'})
+		const token = await jwt.sign(
+			{userId: user.id},
+			config.get('secret'),
+			{expiresIn: '1h'},
+			)
+		res.status(201).json({token, user, message: 'Регистрация прошло успешно!'})
 		errors = []
 	} catch (e){
 		res.status(500).json({message:'Ошибка при регистрации'})

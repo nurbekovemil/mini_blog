@@ -1,16 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Login} from '../components/auth/Login'
 import {Register} from '../components/auth/Register'
-import {Tabs, Tab} from 'react-bootstrap'
+import {Card, Row, Col} from 'react-bootstrap'
 export const AuthPage = () => {
+	const [isLogin, setIsLogin] = useState(true)
+	const handleIsLogin = () => {
+		setIsLogin(!isLogin)
+	}
 	return (
-		<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-			<Tab eventKey="home" title="Авторизация">
-				<Login/>
-			</Tab>
-			<Tab eventKey="profile" title="Регистрация">
-			<Register/>
-			</Tab>
-		</Tabs>
+		<Row>
+			<Col sm={12} md={5} className="mx-auto">
+				<Card>
+				<Card.Body>
+					<Card.Title>{isLogin ? 'Войти в аккаунт' : 'Регистрация аккаунта'}</Card.Title>
+
+						{isLogin ? <Login/> : <Register/>}
+
+						<Card.Link href="#" className="mt-2" onClick={handleIsLogin}>{isLogin ? 'Регистрация':'Войти'}</Card.Link>
+
+				</Card.Body>
+			</Card>
+			</Col>
+		</Row>
 		)
 }

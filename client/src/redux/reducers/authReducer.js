@@ -1,9 +1,10 @@
-import {LOGIN, LOGOUT, AUTH, UPDATE_USER_PICTURE, UPDATE_USER, EDITING} from '../actions/types'
+import {LOGIN, LOGOUT, AUTH, UPDATE_USER_PICTURE, UPDATE_USER, EDITING, AUTHLOADING} from '../actions/types'
 
 const initialState = {
 	isAuth: false,
 	user: null,
-	isEditing: false
+	isEditing: false,
+	isAuthLoading: false
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -12,8 +13,13 @@ export const authReducer = (state = initialState, action) => {
 			return {
 				...state, 
 				isAuth: true,
-				user: action.payload
+				user: action.payload,
 				}
+		case AUTHLOADING: 
+			return {
+				...state, 
+				isAuthLoading: action.payload
+			}
 		case AUTH: 
 			return {
 				...state, 

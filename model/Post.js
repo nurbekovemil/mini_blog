@@ -16,6 +16,9 @@ const postSchema = new Schema({
   owner: {
     type: Types.ObjectId,
     ref: 'User'
+  },
+  link: {
+    type: String,
   }
 })
 

@@ -1,22 +1,33 @@
 import React from 'react'
-import { PencilSquare, Trash, Share} from 'react-bootstrap-icons';
-import {ButtonGroup, Button} from 'react-bootstrap'
+import { PencilSquare, Trash, Clipboard, HandThumbsUp} from 'react-bootstrap-icons';
+import {Row, Col, ButtonGroup, Button} from 'react-bootstrap'
 
 
-export const Tools = ({dispatch, isEditPostModal, deletePost, toggleEditPostForm, post}) => {
+export const Tools = ({dispatch, isEditPostModal, deletePost,likePost, toggleEditPostForm, post}) => {
   
   const handlerRemovePost = () => {
     dispatch(deletePost(post._id))
   }
   const openEditPostForm = () => {
-    dispatch(toggleEditPostForm(isEditPostModal, post._id))
-    // console.log(post._id)
+    dispatch(toggleEditPostForm(isEditPostModal, post))
+    // console.log('open edot form ',post)
   }
+  const handleLikePost = () => {
+    
+  }
+  const copyText = `${window.location.host}/post/${post._id}`
   return (
-      <ButtonGroup aria-label="Basic example">
-        <Button variant="light" size="sm" onClick={openEditPostForm} ><PencilSquare/></Button>
-        <Button variant="light" size="sm"><Share/></Button>
-        <Button variant="light" size="sm" onClick={handlerRemovePost}><Trash/></Button>
-      </ButtonGroup>
+    <Row>
+      <Col className="mr-auto">
+        <Button variant="light" size="sm" onClick={handleLikePost}><HandThumbsUp/></Button>    
+      </Col>
+      <Col className="text-right">
+        <ButtonGroup aria-label="Basic example">
+            <Button variant="light" size="sm" onClick={openEditPostForm} ><PencilSquare/></Button>
+            <Button variant="light" size="sm" onClick={() => {navigator.clipboard.writeText(copyText)}}><Clipboard/></Button>
+            <Button variant="light" size="sm" onClick={handlerRemovePost}><Trash/></Button>
+          </ButtonGroup>
+      </Col>
+    </Row>
   )
 }

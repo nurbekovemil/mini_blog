@@ -8,7 +8,6 @@ const userSchema = new Schema({
 	profileImg: {
 		type: String,
 		require: false,
-		default: '...'
 	},
 	about:{
 		type: String,

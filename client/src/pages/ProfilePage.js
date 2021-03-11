@@ -16,11 +16,11 @@ export const ProfilePage = () => {
 
 	return (
 		<>
-			<Row>
-				<Col xs="3">
+			<Row className="h-75 mb-3">
+				<Col sm="12" md="4">
 					<UserPicture user={user} isEditing={isEditing}/>
 				</Col>
-				<Col>
+				<Col sm="12" md="6">
 					<UserInfo user={user} isEditing={isEditing} isAddPostModal={isAddPostModal}/>
 					<AddPost isAddPostModal={isAddPostModal}/>
 					<EditPost isEditPostModal={isEditPostModal}/>

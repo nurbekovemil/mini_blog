@@ -1,7 +1,7 @@
 import React, {useEffect}from 'react'
-import {CardDeck, Card,Row, Col} from 'react-bootstrap'
+import {Card,Row, Col} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
-import {getPostList, deletePost, toggleEditPostForm} from '../../redux/actions/postAction'
+import {getPostList, deletePost, toggleEditPostForm, likePost } from '../../redux/actions/postAction'
 
 import {Link} from 'react-router-dom'
 import {Tools} from '../../components/post/Tools'
@@ -17,32 +17,31 @@ export const ListPost = () => {
     <>
       {
         posts.length ? posts.map((post, index) => (
-          <Col key={index} className="p-2">
-            <CardDeck>
-              <Card>
+          <Col key={index} className="p-2 d-flex align-items-stretch">
+            
+              <Card className="w-100">
                 <Card.Body>
-                  <Card.Title>{post.title.length > 32 ? `${post.title.slice(0,32)}...` : post.title}</Card.Title>
+                  <Card.Title>{post.title.length > 32 ? `${post.title.slice(0,32)}... ` : post.title}</Card.Title>
                   <Card.Text>
-                    {post.description.length > 80 ? `${post.description.slice(0,80)}...` : post.description}
+                    {post.description.length > 80 ? `${post.description.slice(0,80)}... ` : post.description}
                     <Link to={`/post/${post._id}`}>подробнее</Link>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                  <Row>
-                    <Col className="mr-auto">
-                      
-                    </Col>
-                    <Col className="text-right">
-                      <Tools dispatch={dispatch} post={post} deletePost={deletePost} isEditPostModal={isEditPostModal} toggleEditPostForm={toggleEditPostForm} post={post} />
-                    </Col>
-
-                  </Row>
+                  <Tools 
+                    dispatch={dispatch} 
+                    deletePost={deletePost} 
+                    isEditPostModal={isEditPostModal} 
+                    toggleEditPostForm={toggleEditPostForm} 
+                    post={post}
+                    likePost={likePost} 
+                    />
                 </Card.Footer>
               </Card>
-          </CardDeck>
+          
           </Col>
         )):
-        'not posts '
+        'Добавьте запись'
       }
     </>
   )

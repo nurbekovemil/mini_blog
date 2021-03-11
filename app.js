@@ -1,12 +1,14 @@
 const express = require('express')
 const path = require('path')
 const config = require('config')
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-app.use(express.json())
+app.use(express.json({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors())
 app.use('/public', express.static('public'));

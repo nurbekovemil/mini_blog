@@ -5,7 +5,7 @@ const initialState = {
 	progress: false,
 	message: {
 		isAlert: false,
-		message: '',
+		message: null,
 	},	
 }
 

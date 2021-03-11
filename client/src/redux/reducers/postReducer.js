@@ -4,6 +4,7 @@ const initialState = {
   isAddPostModal: false,
   isEditPostModal: false,
   postDetail: null,
+  currentEditPost:null,
 }
 
 export const postReducer = (state = initialState, action) => {
@@ -19,9 +20,11 @@ export const postReducer = (state = initialState, action) => {
         postDetail: action.payload
       }
     case TOGGLEEDITPOSTMODAL:
+      // console.log('reducer post',action.payload.post)
       return {
         ...state,
-        isEditPostModal: !action.payload
+        currentEditPost: action.payload.post,
+        isEditPostModal: !action.payload.isEdit,
       }
     case TOGGLEADDPOSTMODAL:
       return {

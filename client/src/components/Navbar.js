@@ -16,7 +16,7 @@ export const MainNavbar = () => {
 
 
 	return (
-		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="pt-1 pb-1">
+		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="pt-1 pb-1 mb-4">
 			<Navbar.Brand as={Link} to={isAuth ? '/profile' : '/'}>
       <img
         alt=""
