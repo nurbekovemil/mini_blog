@@ -24,7 +24,19 @@ router.get('/', authmiddleware, async (req, res) => {
     res.status(400).json({message: 'Ошибка при загрузке!'})
   }
 })
-
+// get all posts for home page
+router.get('/posts', async(req, res) => {
+  try {
+    console.log(req.query)
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+    const post_count = await Post.countDocuments().exec()
+    const all_posts = await Post.find({},{owner:0}).limit(limit*1).skip((page-1)*limit).sort({date: -1})
+    res.json({post_count:post_count, all_posts: all_posts })
+  }catch(e){
+    res.json(e.message)
+  }
+})
 
 router.put('/update',authmiddleware, async (req, res) => {
   try {
