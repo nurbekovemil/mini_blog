@@ -1,6 +1,7 @@
 const {Router} = require('express')
 const Post = require('../model/Post')
 const User = require('../model/User')
+const Like = require('../model/Like')
 const authmiddleware = require('../middleware/auth.middleware')
 const router = Router()
 
@@ -35,6 +36,30 @@ router.put('/update',authmiddleware, async (req, res) => {
   }
 })
 
+router.post('/like',authmiddleware, async (req, res) => {
+  try {
+    const {post_id} = req.body
+    const isLiked = await Like.findOne({postid:post_id, userid: req.user.userId})
+    const post = await Post.findOne({_id: post_id})
+    
+    if(isLiked){
+      post.likes_count--
+      await Like.deleteOne({postid:post_id, userid: req.user.userId})
+      await post.save()
+      return res.status(201).json(post)
+    }
+    const like = new Like({
+      userid: req.user.userId,
+      postid: post_id
+    })
+    post.likes_count++
+    await post.save()
+    await like.save()
+    res.status(201).json(post)
+  }catch(e) {
+    res.status(400).json({message: e})
+  }
+})
 
 router.get('/:id', async (req, res) => {
   try {
@@ -42,9 +67,11 @@ router.get('/:id', async (req, res) => {
     postId = await Post.findById({_id: req.params.id})
     author = await User.findOne({_id: postId.owner}, {_id: 0, username: 1, profileImg: 1})
     const post = {
+      _id: postId._id,
       title: postId.title,
       description: postId.description,
       date: postId.date,
+      likes_count: postId.likes_count,
       author
     }
     res.json(post)

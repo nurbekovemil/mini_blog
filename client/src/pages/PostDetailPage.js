@@ -1,10 +1,13 @@
 import React, {useEffect}from 'react'
 import {useParams} from 'react-router-dom'
 
-import {Card, Image,Button, Row, Col} from 'react-bootstrap'
+import {Card, Image,Button,ButtonGroup, Row, Col} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {getPostById} from '../redux/actions/postAction'
-import {Share, CalendarCheck} from 'react-bootstrap-icons';
+import {Share, CalendarCheck, HandThumbsUp} from 'react-bootstrap-icons';
+
+import {likePost} from '../redux/actions/postAction'
+
 
 export const PostDetailPage = () => {
   const postId = useParams().id
@@ -13,6 +16,11 @@ export const PostDetailPage = () => {
   useEffect( () => {
     dispatch(getPostById(postId))
   }, [dispatch, postId])
+
+  const handlerLikePost = () => {
+    dispatch(likePost({post_id: post._id}))
+  }
+
 
   return (
     <>
@@ -34,6 +42,12 @@ export const PostDetailPage = () => {
             {post.description}
           </Card.Text>
           <Card.Text>
+            {/* need optimization */}
+          <ButtonGroup aria-label="Basic example">
+            <Button variant="light" size="sm" onClick={handlerLikePost}><HandThumbsUp/></Button>
+            <Button variant="light" size="sm">{post.likes_count}</Button>
+          </ButtonGroup> 
+          {/* need optimization */}
           <small className="text-muted"><CalendarCheck className="mr-2"/>{new Date(post.date).toLocaleString()}</small>
           </Card.Text>
         </Card.Body>

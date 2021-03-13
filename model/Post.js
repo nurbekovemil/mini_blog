@@ -7,7 +7,7 @@ const postSchema = new Schema({
   },
   description: {
     type: String,
-    required: true
+    require: true
   },
   date: {
     type: Date,
@@ -17,8 +17,14 @@ const postSchema = new Schema({
     type: Types.ObjectId,
     ref: 'User'
   },
-  link: {
-    type: String,
+  like:[{
+    type: Types.ObjectId,
+    ref: 'Like'
+  }],
+  likes_count: {
+    type: Number,
+    default: 0,
+    require: false
   }
 })
 

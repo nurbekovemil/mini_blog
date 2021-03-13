@@ -85,6 +85,21 @@ export const updatePost = (data) => {
     }
   }
 }
+export const likePost = (data) => {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token')
+      await axios.post(`/api/post/like`,data,{
+        headers: {Authorization: `Bearer ${token}`}
+      })
+      .then(res => {
+        dispatch(getPostList())
+      })
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+}
 export const toggleEditPostForm = (isEdit, post) => {
   return async (dispatch) => {
     // console.log(post)

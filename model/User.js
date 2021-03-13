@@ -35,7 +35,11 @@ const userSchema = new Schema({
 	posts: [{
 		type: Types.ObjectId,
 		ref: 'Post'
-	}]
+	}],
+	likes: [{
+			type: Types.ObjectId,
+			ref: 'Like'
+		}]
 })
 
 module.exports = model('User', userSchema)
