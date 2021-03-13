@@ -9,6 +9,6 @@ export const getAllPosts = (data) => async (dispatch) =>{
         dispatch({type: SET_ALL_POSTS, payload: res.data})
       })
   } catch(e){
-    console.log(e)
+    console.log(e.message)
   }
 }
