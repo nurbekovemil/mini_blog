@@ -28,8 +28,10 @@ export const MainNavbar = () => {
     </Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
-				<Nav className="ml-auto">
+				<Nav>
 					<Nav.Link as={Link} to="/">Главная</Nav.Link>
+				</Nav>
+				<Nav className="ml-auto">
 					{!isAuth && <Nav.Link as={Link} to="/auth">Войти</Nav.Link>}
 					{isAuth && 
 					<NavDropdown alignRight title={user.username || ''} id="collasible-nav-dropdown">

@@ -1,5 +1,6 @@
 import {SETPOST, DETAILPOST, TOGGLEADDPOSTMODAL, TOGGLEEDITPOSTMODAL} from './types'
 import {messageAction} from './messageAction'
+import {getAllPosts} from './homeAction'
 
 import axios from 'axios'
 
@@ -11,8 +12,8 @@ export const getPostList = () => {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(res => {
-        const resdata = res.data
-        dispatch({type: SETPOST, payload: resdata.posts})
+        console.log(res.data)
+        dispatch({type: SETPOST, payload: res.data.posts})
       })
     } catch (err) {
       console.log(err)
@@ -85,7 +86,7 @@ export const updatePost = (data) => {
     }
   }
 }
-export const likePost = (data) => {
+export const likePost = (data, distype, p) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token')
@@ -93,22 +94,15 @@ export const likePost = (data) => {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(res => {
-        dispatch(getPostList())
+        distype === 'OWNER_POST' && dispatch(getPostList())
+        distype === 'DETAIL_POST' && dispatch(getPostById(res.data._id))
+        distype === 'ALL_POST' && dispatch(getAllPosts(p))
       })
     } catch (err) {
       console.log(err.response.data)
     }
   }
 }
-export const toggleEditPostForm = (isEdit, post) => {
-  return async (dispatch) => {
-    // console.log(post)
-    dispatch({type: TOGGLEEDITPOSTMODAL, payload: {isEdit:isEdit, post:post}})
-  }
-}
+export const toggleEditPostForm = (isEdit, post) => async (dispatch) => dispatch({type: TOGGLEEDITPOSTMODAL, payload: {isEdit:isEdit, post:post}})
 
-export const toggleAddPostForm = (data) => {
-  return (dispatch) => {
-    dispatch({type: TOGGLEADDPOSTMODAL, payload: data})
-  }
-}
+export const toggleAddPostForm = (data) => (dispatch) => dispatch({type: TOGGLEADDPOSTMODAL, payload: data})

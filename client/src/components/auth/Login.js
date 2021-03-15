@@ -28,52 +28,5 @@ export const Login = () => {
 			titles={titles}
 			button="Войти"
 		/>
-		// <Formik
-		// 	initialValues = {{
-		// 		email: '',
-		// 		password: ''
-		// 	}}
-		// 	validateOnBlur
-		// 	validationSchema={validationsSchema}
-
-		// 	onSubmit={(values) => dispatch(loginAction(values))}
-		// 	>
-		// 		{
-		// 			({values, errors, touched, handleChange, handleBlur, isValid, handleSubmit,dirty}) => (
-		// 				<Form>
-		// 					<Form.Group >
-		// 						<Form.Label>Email</Form.Label> 
-		// 						<Form.Control 
-		// 							type="email" 
-		// 							name="email" 
-		// 							placeholder="Email адрес" 
-		// 							onChange={handleChange} 
-		// 							onBlur={handleBlur}
-		// 							value={values.email}
-		// 							isInvalid={touched.email && errors.email}
-		// 						/>
-		// 						<Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
-		// 					</Form.Group>
-		// 					<Form.Group >
-		// 						<Form.Label>Пароль</Form.Label>
-		// 						<Form.Control 
-		// 							type="password" 
-		// 							name="password" 
-		// 							placeholder="Пароль" 
-		// 							onChange={handleChange} 
-		// 							onBlur={handleBlur}
-		// 							value={values.password}
-		// 							isInvalid={touched.password && errors.password}
-		// 							/>
-		// 						<Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-		// 					</Form.Group>
-		// 					<Button variant="dark" className="w-100" onClick={handleSubmit} type="submit" disabled={!isValid && !dirty}>
-		// 						{isAuthLoading ? <Spinner animation="border" size="sm" variant="light" /> : 'Войти'}
-		// 					</Button>			
-		// 				</Form>
-		// 			)
-		// 		}
-
-		// </Formik>
 	)
 }

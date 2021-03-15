@@ -20,7 +20,6 @@ export const postReducer = (state = initialState, action) => {
         postDetail: action.payload
       }
     case TOGGLEEDITPOSTMODAL:
-      // console.log('reducer post',action.payload.post)
       return {
         ...state,
         currentEditPost: action.payload.post,

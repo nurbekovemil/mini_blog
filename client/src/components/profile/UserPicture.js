@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {updateUserPicture} from '../../redux/actions/userAction'
-import {Card, Button, Form, Row, Col} from 'react-bootstrap'
+import {Card, Button, Form} from 'react-bootstrap'
 
 
 export const UserPicture = ({user, isEditing}) => {

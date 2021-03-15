@@ -16,7 +16,7 @@ export const homeReducer = (state = initialState, action) => {
         post_count: action.payload.post_count
 
 				}
-    case SET_CURRENT_PAGE: 
+    case SET_CURRENT_PAGE:
       return {
         ...state, 
         page: action.payload 

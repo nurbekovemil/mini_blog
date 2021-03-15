@@ -17,6 +17,6 @@ export const messageAction = (message) => {
 					message: null
 				}
 			})
-		}, 5000)
+		}, 4000)
 	}
 }

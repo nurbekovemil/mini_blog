@@ -27,7 +27,6 @@ router.get('/', authmiddleware, async (req, res) => {
 // get all posts for home page
 router.get('/posts', async(req, res) => {
   try {
-    console.log(req.query)
     const page = parseInt(req.query.page)
     const limit = parseInt(req.query.limit)
     const post_count = await Post.countDocuments().exec()
@@ -60,13 +59,16 @@ router.post('/like',authmiddleware, async (req, res) => {
       await post.save()
       return res.status(201).json(post)
     }
+    
     const like = new Like({
       userid: req.user.userId,
       postid: post_id
     })
+
     post.likes_count++
     await post.save()
     await like.save()
+    
     res.status(201).json(post)
   }catch(e) {
     res.status(400).json({message: e})

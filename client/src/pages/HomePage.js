@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import { Row, Col, Card, Pagination} from 'react-bootstrap'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+
+import {Row,Col,Pagination} from 'react-bootstrap'
 import {getAllPosts} from '../redux/actions/homeAction'
+
+import {CardPost} from '../components/post/CardPost'
 
 export const HomePage = () => {
 	const dispatch = useDispatch()
@@ -14,22 +17,14 @@ export const HomePage = () => {
 		dispatch(getAllPosts({limit: limit, page:current_page}))	
 	}
 	useEffect(() => {
-		dispatch(getAllPosts({limit: limit, page:page}))
+		handlePagination(page)
 	}, [])
 	return (
 			<Row>
 				<Col sm={12} md={8}>
 					{
 						posts.length ? posts.map((post, i) => (
-							<Card key={i}>
-								<Card.Body>
-									<Card.Title>{post.title}</Card.Title>
-									<Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-									<Card.Text>
-										{post.description}
-									</Card.Text>
-								</Card.Body>
-							</Card>
+							<CardPost key={i} post={post} access_tools={false} distype="ALL_POST" p={{limit:limit, page:page}}/>
 						)) : 'Loading...'
 					}
 				</Col>
@@ -37,8 +32,8 @@ export const HomePage = () => {
 				<Col sm={12} md={8}>
 					<Pagination>
 						{
-							count_pages.map(i => (
-									<Pagination.Item key={i} active={ i === page} onClick={() => handlePagination(i)}>
+							post_count > limit && count_pages.map(i => (
+									<Pagination.Item key={i} active={i===page} onClick={() => handlePagination(i)}>
 										{i}
 									</Pagination.Item>
 							))
