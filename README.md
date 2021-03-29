@@ -5,6 +5,6 @@
 link: https://react-mini-blog.herokuapp.com/
 
 Stack:
-  1. Language - Javascript
-  2. Framework - React.js
+  1. Frontend - React.js
+  2. Backend - Node.js
   3. Database - MongoDB 
