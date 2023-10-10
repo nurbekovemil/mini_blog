@@ -1,5 +1,5 @@
 {
-	"MONGOURI": "mongodb+srv://emil:1234Emil@cluster0.4qx9v.mongodb.net/mini-blog?retryWrites=true&w=majority",
+	"MONGOURI": "mongodb+srv://<username>:<password>@cluster0.4qx9v.mongodb.net/mini-blog?retryWrites=true&w=majority",
 	"secret": "blog-mern"
 
 }
